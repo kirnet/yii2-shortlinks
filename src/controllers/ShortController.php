@@ -107,7 +107,7 @@ class ShortController extends Controller
             return false;
         }
         $shortLink = ShortLinks::findOne(['short_url' => $slug]);
-        if (($shortLink && strtotime($shortLink->date_expire) >= time()) || $shortLink->date_expire == '0000-00-00') {
+        if ($shortLink && (strtotime($shortLink->date_expire) >= time() || $shortLink->date_expire == '0000-00-00')) {
             $shortLinksInfo = new ShortLinksInfo();
             $info = new \stdClass();
             $info->userAgent = $_SERVER['HTTP_USER_AGENT'];
